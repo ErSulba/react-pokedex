@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from './Image';
+import Moves from './moves';
 
 export default function Info(props) {
   const sprites = props.sprites
@@ -10,6 +11,7 @@ export default function Info(props) {
           {props.name}
       </h1>
       <Image name={props.name} {...sprites} />
+      <Moves></Moves>
     </div>
   )
 }
