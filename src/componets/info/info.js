@@ -11,7 +11,7 @@ export default function Info(props) {
           {props.name}
       </h1>
       <Image name={props.name} {...sprites} />
-      <Moves></Moves>
+      <Moves moves={props.moves} ></Moves>
     </div>
   )
 }

@@ -1,29 +1,14 @@
 import React, { Component } from 'react'
 import Info from '../info/info';
 import Axios from 'axios';
+import Search from './components/search';
 
 export default class Pokemon extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      text: 'test',
-      pokemon: '',
-    }
-    this.getData = this.getData.bind(this)
-    this.showText = this.showText.bind(this)
-    this.getPokemon = this.getPokemon.bind(this)
+  state = {
+    pokemon: 'bulbasaur',
+    text: ''
   }
-  getData(event){
-    console.log(event.target.value)
-  }
-  showText(event){
-    this.setState({
-      text: event.target.value,
-      pokemon: event.target.value,
-    })
-    this.getData(event)
-    this.getPokemon()
-  }
+
   getPokemon = async event => {
     try {
       const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${event.target.value}/`)
@@ -37,12 +22,13 @@ export default class Pokemon extends Component {
     }
    
   }
+
   render() {
     return (
       <div>
         <p> This is a test</p>
         <Info {...this.state.pokemon}/>
-        <input type='text' onChange={this.getPokemon} />
+        <Search handleOnchange={this.getPokemon} />
       </div>
     )
   }
