@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Niramit:300,300i,400,500,700');
+
+.search {
+    > div {
+        > input {
+            font-family: 'Niramit', sans-serif;
+            font-size: 1.2rem;
+            border: solid 3px white;
+            border-radius: 35px;
+            width: 25px;
+            height: 25px;
+            padding: 10px;
+            background: transparent;
+            color: white;
+            outline: none;
+            box-shadow: 0 1px #0091c2;
+            transition: width 0.5s;
+            text-align: center;
+    
+            &:focus {
+                width: 250px;
+            }
+        }
+    }
+    
+
+}
+
+
+
