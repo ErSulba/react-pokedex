@@ -5,29 +5,43 @@ import Search from './components/search';
 
 export default class Pokemon extends Component {
   state = {
-    pokemon: 'bulbasaur',
-    text: ''
+    pokemon: null,
+    text: '',
+    isOk: false,
+    speciesData: null
   }
 
   getPokemon = async event => {
-    try {
-      const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${event.target.value}/`)
-      // console.log(response)
+    let value = event.target.value
+    if (value !== '' ) {
+      try {
+      const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${value}/`)
+      const {species: {url}} = response.data 
       this.setState({
-        pokemon: response.data
+        pokemon: response.data,
+        isOk: true
       })
-      // console.log(this.state.pokemon)
+      this.getPokemonSpecies(url)
+      
     }catch(error){
       console.error(error)
+      this.setState({isOk: false})
     }
-   
+    }   
   }
-
+  getPokemonSpecies = async (speciesUrl) => {
+    try {
+      const response = await Axios.get(speciesUrl)
+      this.setState({speciesData: response.data})
+    } catch (error) {
+      
+    }
+  }
   render() {
     return (
       <div>
         <p> This is a test</p>
-        <Info {...this.state.pokemon}/>
+        <Info {...this.state.pokemon} isOk={this.state.isOk}/>
         <Search handleOnchange={this.getPokemon} />
       </div>
     )

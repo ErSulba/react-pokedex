@@ -1,16 +1,20 @@
 import React from 'react'
 import Image from './Image';
 import Moves from './moves';
+import Entrie from './Entrie';
+import Name from './Name';
 
 export default function Info(props) {
   const sprites = props.sprites
-  // const default_sprite = sprites.front_default
+  const isOk = props.isOk
+  if (!isOk) {
+    return null
+  }
   return (
     <div>
-      <h1>
-          {props.name}
-      </h1>
+      <Name name={props.name} />
       <Image name={props.name} {...sprites} />
+      <Entrie  />
       <Moves moves={props.moves} ></Moves>
     </div>
   )
