@@ -14,7 +14,7 @@ export default function Info(props) {
     <div>
       <Name name={props.name} />
       <Image name={props.name} {...sprites} />
-      <Entrie  />
+      <Entrie entries={props.flavor_text_entries} />
       <Moves moves={props.moves} ></Moves>
     </div>
   )
