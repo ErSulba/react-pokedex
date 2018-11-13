@@ -41,7 +41,7 @@ export default class Pokemon extends Component {
     return (
       <div>
         <p> This is a test</p>
-        <Info {...this.state.pokemon} isOk={this.state.isOk}/>
+        <Info {...this.state.pokemon} isOk={this.state.isOk} {...this.state.speciesData}/>
         <Search handleOnchange={this.getPokemon} />
       </div>
     )
