@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Info from '../info/info';
 import Axios from 'axios';
 import Search from './components/search';
+import Pokemon from './../../utils/Pokemon'
 
-export default class Pokemon extends Component {
+export default class Pokedex extends Component {
   state = {
     pokemon: null,
     text: '',
@@ -16,12 +17,15 @@ export default class Pokemon extends Component {
     if (value !== '' ) {
       try {
       const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${value}/`)
-      const {species: {url}} = response.data 
+      const {species: {url}} = response.data
+      const pokemon =  new Pokemon(response.data)
+      const speciesResponse = await Axios.get(url)
+      const 
       this.setState({
-        pokemon: response.data,
+        pokemon,
         isOk: true
       })
-      this.getPokemonSpecies(url)
+      // this.getPokemonSpecies(url)
       
     }catch(error){
       console.error(error)
@@ -29,14 +33,14 @@ export default class Pokemon extends Component {
     }
     }   
   }
-  getPokemonSpecies = async (speciesUrl) => {
-    try {
-      const response = await Axios.get(speciesUrl)
-      this.setState({speciesData: response.data})
-    } catch (error) {
+  // getPokemonSpecies = async (speciesUrl) => {
+  //   try {
+  //     const response = await Axios.get(speciesUrl)
+  //     this.setState({speciesData: response.data})
+  //   } catch (error) {
       
-    }
-  }
+  //   }
+  // }
   render() {
     return (
       <div>
