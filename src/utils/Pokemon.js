@@ -1,10 +1,11 @@
 class Pokemon {
-  constructor(data){
+  constructor(data, species_data){
     this.id = data.id
     this.name = data.name;
-    this.sprite = data.sprite.front_default
+    this.sprite = data.sprites.front_default
     this.type = data.types
-    this.type = data.moves
+    this.moves = data.moves
+    this.entries = species_data.flavor_text_entries
   }
 }
 

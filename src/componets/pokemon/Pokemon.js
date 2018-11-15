@@ -3,49 +3,40 @@ import Info from '../info/info';
 import Axios from 'axios';
 import Search from './components/search';
 import Pokemon from './../../utils/Pokemon'
+import converString from './../../utils/misc';
 
 export default class Pokedex extends Component {
   state = {
     pokemon: null,
     text: '',
     isOk: false,
-    speciesData: null
   }
 
   getPokemon = async event => {
-    let value = event.target.value
+    let value = converString(event.target.value) 
     if (value !== '' ) {
       try {
       const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${value}/`)
       const {species: {url}} = response.data
-      const pokemon =  new Pokemon(response.data)
       const speciesResponse = await Axios.get(url)
-      const 
+      const pokemon =  new Pokemon(response.data, speciesResponse.data)
+      // this.getPokemonSpecies(url)
       this.setState({
         pokemon,
-        isOk: true
+        isOk : true
       })
-      // this.getPokemonSpecies(url)
       
-    }catch(error){
-      console.error(error)
-      this.setState({isOk: false})
-    }
+      }catch(error){
+        console.error(error)
+        this.setState({isOk: false})
+      }
     }   
   }
-  // getPokemonSpecies = async (speciesUrl) => {
-  //   try {
-  //     const response = await Axios.get(speciesUrl)
-  //     this.setState({speciesData: response.data})
-  //   } catch (error) {
-      
-  //   }
-  // }
   render() {
     return (
       <div>
-        <p> This is a test</p>
-        <Info {...this.state.pokemon} isOk={this.state.isOk} {...this.state.speciesData}/>
+        <h1> React Pokedex </h1>
+        <Info {...this.state.pokemon} isOk={this.state.isOk} />
         <Search handleOnchange={this.getPokemon} />
       </div>
     )
